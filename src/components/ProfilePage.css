@@ -1,0 +1,250 @@
+.profile-page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-page .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 100%);
+  z-index: 0;
+}
+
+.profile-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  padding-top: max(16px, env(safe-area-inset-top));
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.back-button:active {
+  opacity: 0.5;
+}
+
+.profile-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.profile-header-spacer {
+  width: 40px;
+}
+
+.profile-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.profile-id-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.profile-id {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.copy-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.copy-button:hover {
+  opacity: 0.7;
+}
+
+.copy-button:active {
+  opacity: 0.5;
+}
+
+.copy-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.profile-menu-item {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  border-radius: 12px;
+  border: 1px solid rgba(147, 51, 234, 0.5);
+  background: rgba(26, 11, 46, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, border-color 0.2s;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+}
+
+.profile-menu-item:hover {
+  border-color: rgba(147, 51, 234, 0.7);
+}
+
+.profile-menu-item:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.menu-text {
+  flex: 1;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.subscription-link-section {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subscription-link-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.subscription-link-input-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(26, 11, 46, 0.6);
+  border: 1px solid rgba(147, 51, 234, 0.5);
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 48px;
+  min-height: 48px;
+}
+
+.subscription-link-input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+  outline: none;
+  padding: 12px 0;
+}
+
+.subscription-link-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.instruction-button {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  border-radius: 28px;
+  border: none;
+  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  margin-top: 8px;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+}
+
+.instruction-button:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.instruction-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.instruction-text {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+

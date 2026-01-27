@@ -1,0 +1,145 @@
+.payment-page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 100%);
+  z-index: 0;
+}
+
+.payment-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.payment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  padding-top: max(16px, env(safe-area-inset-top));
+}
+
+.payment-back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.payment-back-button:hover {
+  opacity: 0.7;
+}
+
+.payment-back-button:active {
+  opacity: 0.5;
+}
+
+.payment-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.payment-header-spacer {
+  width: 40px;
+}
+
+.payment-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-methods-section {
+  width: 100%;
+  background: #2E1F4B;
+  border-radius: 16px;
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+}
+
+.payment-methods-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 24px;
+  transition: opacity 0.2s;
+}
+
+.payment-methods-add:hover {
+  opacity: 0.9;
+}
+
+.payment-methods-add:active {
+  opacity: 0.8;
+}
+
+.payment-add-icon {
+  flex-shrink: 0;
+}
+
+.payment-methods-text {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+  max-width: 280px;
+}
+
+.payment-auto-renewal-button {
+  width: 100%;
+  min-height: 56px;
+  border-radius: 16px;
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  background: #2E1F4B;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  padding: 16px 20px;
+  appearance: none;
+  font: inherit;
+}
+
+.payment-auto-renewal-button:hover {
+  opacity: 0.95;
+}
+
+.payment-auto-renewal-button:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}

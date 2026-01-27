@@ -1,0 +1,42 @@
+.service-status {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  row-gap: 6px;
+  column-gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 18px;
+  align-items: baseline;
+}
+
+.service-name {
+  font-size: clamp(26px, 7.5vw, 32px);
+  font-weight: 600;
+  color: white;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.service-state {
+  font-size: clamp(14px, 4vw, 16px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.25;
+}
+
+.subscription-date {
+  font-size: clamp(14px, 4vw, 16px);
+  color: white;
+  line-height: 1.25;
+  text-align: right;
+  justify-self: end;
+}
+
+.subscription-type {
+  font-size: clamp(13px, 3.5vw, 14px);
+  color: #e879f9;
+  line-height: 1.25;
+  text-align: right;
+  justify-self: end;
+}
+
