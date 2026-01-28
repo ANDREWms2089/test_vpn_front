@@ -144,7 +144,8 @@ function App() {
     return (
       <SetupFlow 
         onBack={() => setCurrentPage('home')} 
-        onComplete={() => setCurrentPage('home')} 
+        onComplete={() => setCurrentPage('home')}
+        user={user}
       />
     );
   }

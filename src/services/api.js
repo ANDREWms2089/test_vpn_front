@@ -125,6 +125,46 @@ class ApiService {
       },
     });
   }
+
+  async generateKey(expireDays) {
+    const url = 'https://get.alexnewsw33.ru/generate';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Secret-Key': 'xod3vN4Ga8mo6xM',
+      },
+      body: JSON.stringify({ expire_days: Number(expireDays) }),
+    });
+    if (!response.ok) {
+      const text = await response.text();
+      let msg = `HTTP error! status: ${response.status}`;
+      try {
+        const data = JSON.parse(text);
+        if (data.detail) {
+          if (Array.isArray(data.detail)) {
+            msg = data.detail.map((d) => d.msg || JSON.stringify(d)).join('; ');
+          } else if (typeof data.detail === 'string') {
+            msg = data.detail;
+          }
+        }
+      } catch {
+        msg = text || msg;
+      }
+      throw new Error(msg);
+    }
+    return response.json();
+  }
+
+  async updateKey(userId, key) {
+    return this.request('/users/key/', {
+      method: 'PUT',
+      body: {
+        userid: Number(userId),
+        user_key: String(key),
+      },
+    });
+  }
 }
 
 export default new ApiService();

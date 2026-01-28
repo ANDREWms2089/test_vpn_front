@@ -15,13 +15,15 @@ function ServiceStatus({ user }) {
   };
 
   const tariffEndDate = user?.tariff_end_date;
-  const subscriptionDate = tariffEndDate
+  const hasActiveSubscription = tariffEndDate && new Date(tariffEndDate) > new Date();
+  const subscriptionDate = tariffEndDate && hasActiveSubscription
     ? `до ${formatDate(tariffEndDate)}`
-    : 'до 31 декабря 2025';
+    : 'нет подписки';
 
-  const subscriptionType = user?.tariff_plan
-    ? (user.tariff_plan.toLowerCase().includes('trial') || user.tariff_plan.toLowerCase().includes('basic') ? 'пробный период' : 'активна')
-    : 'пробный период';
+  const tariffPlan = user?.tariff_plan;
+  const subscriptionType = tariffPlan && hasActiveSubscription
+    ? (tariffPlan.toLowerCase() === 'basic' ? 'Basic' : tariffPlan.toLowerCase() === 'pro' ? 'Pro' : tariffPlan)
+    : 'нет подписки';
 
   return (
     <div className="service-status">
