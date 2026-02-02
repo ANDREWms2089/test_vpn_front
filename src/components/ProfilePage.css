@@ -28,28 +28,9 @@
 .profile-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 16px 20px;
   padding-top: max(16px, env(safe-area-inset-top));
-}
-
-.back-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s;
-}
-
-.back-button:hover {
-  opacity: 0.7;
-}
-
-.back-button:active {
-  opacity: 0.5;
 }
 
 .profile-title {
@@ -57,10 +38,6 @@
   font-weight: 600;
   color: white;
   margin: 0;
-}
-
-.profile-header-spacer {
-  width: 40px;
 }
 
 .profile-body {

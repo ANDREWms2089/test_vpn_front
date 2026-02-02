@@ -11,6 +11,9 @@ import TransactionsModal from './TransactionsModal';
 import ReferralModal from './ReferralModal';
 import AgreementModal from './AgreementModal';
 import apiService from '../services/api';
+import { triggerHaptic, getMiniApp } from '../services/telegram';
+
+const SUPPORT_LINK = 'https://t.me/maria_matrohina';
 
 function ProfilePage({ user, onBack, onNavigateToPayment }) {
   const uid = user?.userid ?? user?.id;
@@ -57,10 +60,12 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
   const userId = uid ?? '';
 
   const handleCopyId = () => {
+    triggerHaptic();
     navigator.clipboard.writeText(String(userId));
   };
 
   const handleCopyLink = () => {
+    triggerHaptic();
     if (subscriptionLink) navigator.clipboard.writeText(subscriptionLink);
   };
 
@@ -69,13 +74,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
       <div className="background"></div>
       <div className="profile-content">
         <div className="profile-header">
-          <button type="button" className="back-button" onClick={onBack}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
           <h1 className="profile-title">Профиль</h1>
-          <div className="profile-header-spacer"></div>
         </div>
 
         <div className="profile-body">
@@ -89,7 +88,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </div>
           </div>
 
-          <button type="button" className="profile-menu-item" onClick={() => onNavigateToPayment?.()}>
+          <button type="button" className="profile-menu-item" onClick={() => { triggerHaptic(); onNavigateToPayment?.(); }}>
             <img src={icPay} alt="" className="menu-icon" />
             <span className="menu-text">Оплата</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +96,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </svg>
           </button>
 
-          <button type="button" className="profile-menu-item" onClick={() => setIsTransactionsOpen(true)}>
+          <button type="button" className="profile-menu-item" onClick={() => { triggerHaptic(); setIsTransactionsOpen(true); }}>
             <img src={icTrans} alt="" className="menu-icon" />
             <span className="menu-text">Мои транзакции</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +104,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </svg>
           </button>
 
-          <button type="button" className="profile-menu-item" onClick={() => setIsReferralOpen(true)}>
+          <button type="button" className="profile-menu-item" onClick={() => { triggerHaptic(); setIsReferralOpen(true); }}>
             <img src={icReferal} alt="" className="menu-icon" />
             <span className="menu-text">Реферальная программа</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +112,12 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </svg>
           </button>
 
-          <button type="button" className="profile-menu-item" onClick={() => {}}>
+          <button type="button" className="profile-menu-item" onClick={() => {
+            triggerHaptic();
+            const miniApp = getMiniApp?.();
+            if (miniApp?.openLink) miniApp.openLink(SUPPORT_LINK);
+            else if (typeof window !== 'undefined') window.open(SUPPORT_LINK, '_blank');
+          }}>
             <img src={icSupport} alt="" className="menu-icon" />
             <span className="menu-text">Связаться с поддержкой</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +125,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </svg>
           </button>
 
-          <button type="button" className="profile-menu-item" onClick={() => setIsAgreementOpen(true)}>
+          <button type="button" className="profile-menu-item" onClick={() => { triggerHaptic(); setIsAgreementOpen(true); }}>
             <img src={icDoc} alt="" className="menu-icon" />
             <span className="menu-text">Пользовательское соглашение</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +148,7 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
             </div>
           </div>
 
-          <button type="button" className="instruction-button" onClick={() => {}}>
+          <button type="button" className="instruction-button" onClick={() => triggerHaptic()}>
             <img src={icTut} alt="" className="instruction-icon" />
             <span className="instruction-text">Инструкция для всех платформ</span>
           </button>

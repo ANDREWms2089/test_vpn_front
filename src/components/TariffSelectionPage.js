@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './TariffSelectionPage.css';
+import { triggerHaptic } from '../services/telegram';
 
 const TARIFFS = [
   {
     id: 'basic',
     name: 'Basic',
-    price: 'от 149 Р/месяц',
+    price: 'от 399 Р/месяц',
     features: [
       'Станут доступны: Inst, YouTube, TikTok и др',
       'Необходим для базового пользования сетью',
@@ -15,7 +16,7 @@ const TARIFFS = [
   {
     id: 'pro',
     name: 'Pro',
-    price: 'от 399 Р/месяц',
+    price: 'от 999 Р/месяц',
     features: [
       'Работает даже при блокировках в городах LTE/5G',
       'Усиленная защита и обход',
@@ -28,6 +29,7 @@ function TariffSelectionPage({ onBack, onNext }) {
   const [selectedId, setSelectedId] = useState('basic');
 
   const handleNext = () => {
+    triggerHaptic();
     onNext?.(selectedId);
   };
 
@@ -36,13 +38,7 @@ function TariffSelectionPage({ onBack, onNext }) {
       <div className="tariff-background"></div>
       <div className="tariff-content">
         <div className="tariff-header">
-          <button type="button" className="tariff-back-button" onClick={onBack}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
           <h1 className="tariff-title">Выбор тарифа</h1>
-          <div className="tariff-header-spacer"></div>
         </div>
 
         <div className="tariff-body">
@@ -52,7 +48,7 @@ function TariffSelectionPage({ onBack, onNext }) {
                 key={t.id}
                 type="button"
                 className={`tariff-card ${selectedId === t.id ? 'tariff-card-selected' : ''}`}
-                onClick={() => setSelectedId(t.id)}
+                onClick={() => { triggerHaptic(); setSelectedId(t.id); }}
               >
                 <div className="tariff-card-header">
                   <span className="tariff-card-name">{t.name}</span>

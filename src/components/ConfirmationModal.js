@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ConfirmationModal.css';
 import apiService from '../services/api';
+import { triggerHaptic } from '../services/telegram';
+import { PAYMENT_METHODS, getPaymentMethod, setPaymentMethod } from '../utils/paymentMethod';
 
 function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, userId }) {
   const [isPaying, setIsPaying] = useState(false);
   const [payError, setPayError] = useState(null);
+  const [paymentMethod, setPaymentMethodState] = useState('card');
+
+  useEffect(() => {
+    if (isOpen) setPaymentMethodState(getPaymentMethod());
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -22,7 +29,9 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
   const returnUrl = typeof window !== 'undefined' ? window.location.origin + '/' : '';
 
   const handlePay = async () => {
+    triggerHaptic();
     if (!userId || !plan || isPaying) return;
+    setPaymentMethod(paymentMethod);
     setIsPaying(true);
     setPayError(null);
     try {
@@ -32,6 +41,7 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
         duration_days: durationDays,
         amount: String(plan.price),
         return_url: returnUrl,
+        payment_method: paymentMethod,
       });
       if (res && res.confirmation_url) {
         window.location.href = res.confirmation_url;
@@ -46,11 +56,11 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
   };
 
   return (
-    <div className="confirmation-overlay" onClick={onClose}>
+    <div className="confirmation-overlay" onClick={() => { triggerHaptic(); onClose?.(); }}>
       <div className="confirmation-modal" onClick={(e) => e.stopPropagation()}>
         <div className="confirmation-header">
           <h2 className="confirmation-title">Подтверждение</h2>
-          <button type="button" className="confirmation-close" onClick={onClose}>
+          <button type="button" className="confirmation-close" onClick={() => { triggerHaptic(); onClose?.(); }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>
@@ -66,15 +76,20 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
             <span className="confirmation-label">Количество устройств</span>
             <span className="confirmation-value">{deviceCount}</span>
           </div>
-          <div className="confirmation-row confirmation-payment-row">
-            <div className="confirmation-payment-method">
-              <svg className="confirmation-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="5" width="20" height="14" rx="2" stroke="white" strokeWidth="2"/>
-                <path d="M2 10H22" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-              <span className="confirmation-payment-text">Оплата новой картой</span>
+          <div className="confirmation-row">
+            <span className="confirmation-label">Способ оплаты</span>
+            <div className="confirmation-payment-methods">
+              {PAYMENT_METHODS.map((method) => (
+                <button
+                  key={method.id}
+                  type="button"
+                  className={`confirmation-payment-method-btn ${paymentMethod === method.id ? 'confirmation-payment-method-btn-selected' : ''}`}
+                  onClick={() => { triggerHaptic(); setPaymentMethodState(method.id); }}
+                >
+                  {method.label}
+                </button>
+              ))}
             </div>
-            <button type="button" className="confirmation-change-link">Изменить &gt;</button>
           </div>
 
           {payError && (

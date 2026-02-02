@@ -6,17 +6,15 @@ import SubscriptionButton from './components/SubscriptionButton';
 import SetupButton from './components/SetupButton';
 import ProfileButton from './components/ProfileButton';
 import SupportButton from './components/SupportButton';
-import SupportModal from './components/SupportModal';
 import ProfilePage from './components/ProfilePage';
 import PaymentPage from './components/PaymentPage';
 import SetupFlow from './components/SetupFlow';
 import TariffSelectionPage from './components/TariffSelectionPage';
 import SubscriptionSelectionPage from './components/SubscriptionSelectionPage';
-import { initTelegramSDK, getTelegramUser } from './services/telegram';
+import { initTelegramSDK, getTelegramUser, showBackButton, hideBackButton } from './services/telegram';
 import apiService from './services/api';
 
 function App() {
-  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [subscribeTariff, setSubscribeTariff] = useState(null);
   const [user, setUser] = useState(null);
@@ -86,6 +84,36 @@ function App() {
 
     initializeApp();
   }, []);
+
+  useEffect(() => {
+    if (currentPage === 'home') {
+      hideBackButton();
+      return;
+    }
+    if (currentPage === 'profile') {
+      showBackButton(() => setCurrentPage('home'));
+      return;
+    }
+    if (currentPage === 'payment') {
+      showBackButton(() => setCurrentPage('profile'));
+      return;
+    }
+    if (currentPage === 'tariff') {
+      showBackButton(() => setCurrentPage('home'));
+      return;
+    }
+    if (currentPage === 'subscription') {
+      showBackButton(() => {
+        setSubscribeTariff(null);
+        setCurrentPage('tariff');
+      });
+      return;
+    }
+    if (currentPage === 'setup') {
+      showBackButton(() => setCurrentPage('home'));
+    }
+    return () => hideBackButton();
+  }, [currentPage]);
 
   if (isLoading) {
     return (
@@ -157,18 +185,14 @@ function App() {
           <Logo />
           <div className="buttons-container">
             <ServiceStatus user={user} />
-            <SubscriptionButton onOpenSubscribe={() => setCurrentPage('tariff')} />
+            <SubscriptionButton user={user} onOpenSubscribe={() => setCurrentPage('tariff')} />
             <SetupButton onOpenSetup={() => setCurrentPage('setup')} />
             <div className="bottom-buttons">
               <ProfileButton onOpenProfile={() => setCurrentPage('profile')} />
-              <SupportButton onOpenModal={() => setIsSupportModalOpen(true)} />
+              <SupportButton />
             </div>
           </div>
         </div>
-        <SupportModal 
-          isOpen={isSupportModalOpen} 
-          onClose={() => setIsSupportModalOpen(false)} 
-        />
       </div>
   );
 }

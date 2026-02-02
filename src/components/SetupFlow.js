@@ -7,6 +7,7 @@ import icAdd from '../images/icons/ic_add.png';
 import icDone from '../images/icons/ic_done.png';
 import apiService from '../services/api';
 import Toast from './Toast';
+import { triggerHaptic } from '../services/telegram';
 
 const PLATFORM_LINKS = {
   'Windows': 'https://www.happ.su/main/ru',
@@ -25,6 +26,7 @@ function SetupFlow({ onBack, onComplete, user }) {
   const subscriptionLink = user?.user_key || 'https://ultm.app/XMEEucdk';
 
   const handleInstallClick = () => {
+    triggerHaptic();
     window.open(installLink, '_blank');
   };
 
@@ -38,11 +40,12 @@ function SetupFlow({ onBack, onComplete, user }) {
   };
 
   const handleAddSubscription = async () => {
+    triggerHaptic();
     const hasSubscription = user?.tariff_plan && user?.tariff_end_date && new Date(user.tariff_end_date) > new Date();
     const hasKey = user?.user_key;
 
     if (!hasSubscription) {
-      setToast({ isOpen: true, message: 'Подписка не приобретена', type: 'error' });
+      setToast({ isOpen: true, message: 'Сначала оформите подписку. Перейдите в раздел «Купить подписку» на главном экране.', type: 'error' });
       return;
     }
 
@@ -108,10 +111,10 @@ function SetupFlow({ onBack, onComplete, user }) {
           <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
           <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
           <div className="setup-buttons">
-            <button className="setup-primary-button" onClick={() => setStep(2)}>
+            <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
               Начать установку на этом устройстве
             </button>
-            <button className="setup-secondary-button" onClick={() => setStep(2)}>
+            <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
               Установить на другом устройстве
             </button>
           </div>
@@ -138,7 +141,7 @@ function SetupFlow({ onBack, onComplete, user }) {
               <img src={icConnect} alt="" className="button-icon-small" />
               Установить
             </button>
-            <button className="setup-next-button" onClick={() => setStep(3)}>
+            <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
               Далее
             </button>
           </div>
@@ -165,7 +168,7 @@ function SetupFlow({ onBack, onComplete, user }) {
               <img src={icConnect} alt="" className="button-icon-small" />
               Добавить
             </button>
-            <button className="setup-next-button" onClick={() => setStep(4)}>
+            <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
               Далее
             </button>
           </div>
@@ -188,7 +191,7 @@ function SetupFlow({ onBack, onComplete, user }) {
           <h2 className="setup-title">Готово!</h2>
           <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
           <div className="setup-buttons">
-            <button className="setup-complete-button" onClick={onComplete}>
+            <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
               Завершить настройку
             </button>
           </div>
@@ -212,10 +215,10 @@ function SetupFlow({ onBack, onComplete, user }) {
             <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
             <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
             <div className="setup-buttons">
-              <button className="setup-primary-button" onClick={() => setStep(2)}>
+              <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
                 Начать установку на этом устройстве
               </button>
-              <button className="setup-secondary-button" onClick={() => setStep(2)}>
+              <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
                 Установить на другом устройстве
               </button>
             </div>
@@ -239,7 +242,7 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icConnect} alt="" className="button-icon-small" />
                 Установить
               </button>
-              <button className="setup-next-button" onClick={() => setStep(3)}>
+              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
                 Далее
               </button>
             </div>
@@ -263,7 +266,7 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icConnect} alt="" className="button-icon-small" />
                 Добавить
               </button>
-              <button className="setup-next-button" onClick={() => setStep(4)}>
+              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
                 Далее
               </button>
             </div>
@@ -283,7 +286,7 @@ function SetupFlow({ onBack, onComplete, user }) {
             <h2 className="setup-title">Готово!</h2>
             <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
             <div className="setup-buttons">
-              <button className="setup-complete-button" onClick={onComplete}>
+              <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
                 Завершить настройку
               </button>
             </div>

@@ -98,43 +98,33 @@
   color: white;
 }
 
-.confirmation-payment-row {
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-top: 1px solid rgba(147, 51, 234, 0.2);
-}
-
-.confirmation-payment-method {
+.confirmation-payment-methods {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
+  margin-top: 8px;
 }
 
-.confirmation-card-icon {
-  flex-shrink: 0;
-}
-
-.confirmation-payment-text {
-  font-size: 16px;
-  font-weight: 500;
+.confirmation-payment-method-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(147, 51, 234, 0.5);
+  background: rgba(147, 51, 234, 0.15);
   color: white;
-}
-
-.confirmation-change-link {
-  background: none;
-  border: none;
-  color: #a78bfa;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  padding: 4px 0;
-  transition: opacity 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.confirmation-change-link:hover {
-  opacity: 0.9;
+.confirmation-payment-method-btn:hover {
+  background: rgba(147, 51, 234, 0.25);
+  border-color: rgba(147, 51, 234, 0.7);
+}
+
+.confirmation-payment-method-btn-selected {
+  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
+  border-color: transparent;
 }
 
 .confirmation-error {

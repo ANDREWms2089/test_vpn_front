@@ -1,15 +1,16 @@
 import React from 'react';
 import './AgreementModal.css';
+import { triggerHaptic } from '../services/telegram';
 
 function AgreementModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="agreement-overlay" onClick={onClose}>
+    <div className="agreement-overlay" onClick={() => { triggerHaptic(); onClose?.(); }}>
       <div className="agreement-modal" onClick={(e) => e.stopPropagation()}>
         <div className="agreement-header">
           <h2 className="agreement-title">Пользовательское соглашение</h2>
-          <button type="button" className="agreement-close" onClick={onClose}>
+          <button type="button" className="agreement-close" onClick={() => { triggerHaptic(); onClose?.(); }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>

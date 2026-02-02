@@ -28,28 +28,9 @@
 .payment-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 16px 20px;
   padding-top: max(16px, env(safe-area-inset-top));
-}
-
-.payment-back-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s;
-}
-
-.payment-back-button:hover {
-  opacity: 0.7;
-}
-
-.payment-back-button:active {
-  opacity: 0.5;
 }
 
 .payment-title {
@@ -57,10 +38,6 @@
   font-weight: 600;
   color: white;
   margin: 0;
-}
-
-.payment-header-spacer {
-  width: 40px;
 }
 
 .payment-body {
@@ -77,46 +54,66 @@
   background: #2E1F4B;
   border-radius: 16px;
   border: 1px solid rgba(147, 51, 234, 0.3);
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 20px;
-}
-
-.payment-methods-add {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
+}
+
+.payment-methods-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.payment-methods-section-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.payment-methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-method-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  padding: 24px;
-  transition: opacity 0.2s;
-}
-
-.payment-methods-add:hover {
-  opacity: 0.9;
-}
-
-.payment-methods-add:active {
-  opacity: 0.8;
-}
-
-.payment-add-icon {
-  flex-shrink: 0;
-}
-
-.payment-methods-text {
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(147, 51, 234, 0.4);
+  background: rgba(147, 51, 234, 0.1);
   color: white;
   font-size: 16px;
   font-weight: 500;
-  text-align: center;
-  line-height: 1.4;
-  max-width: 280px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-align: left;
+}
+
+.payment-method-item:hover {
+  background: rgba(147, 51, 234, 0.2);
+  border-color: rgba(147, 51, 234, 0.6);
+}
+
+.payment-method-item-selected {
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.4) 0%, rgba(37, 99, 235, 0.4) 100%);
+  border-color: rgba(147, 51, 234, 0.8);
+}
+
+.payment-method-item-label {
+  flex: 1;
+}
+
+.payment-method-item-check {
+  flex-shrink: 0;
+  color: #22c55e;
 }
 
 .payment-auto-renewal-button {

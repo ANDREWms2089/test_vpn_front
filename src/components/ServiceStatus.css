@@ -26,17 +26,39 @@
 
 .subscription-date {
   font-size: clamp(14px, 4vw, 16px);
-  color: white;
   line-height: 1.25;
   text-align: right;
   justify-self: end;
 }
 
+.subscription-date.subscription-color-green {
+  color: #22c55e;
+}
+
+.subscription-date.subscription-color-yellow {
+  color: #eab308;
+}
+
+.subscription-date.subscription-color-red {
+  color: #ef4444;
+}
+
 .subscription-type {
   font-size: clamp(13px, 3.5vw, 14px);
-  color: #e879f9;
   line-height: 1.25;
   text-align: right;
   justify-self: end;
+}
+
+.subscription-type.subscription-color-green {
+  color: #22c55e;
+}
+
+.subscription-type.subscription-color-yellow {
+  color: #eab308;
+}
+
+.subscription-type.subscription-color-red {
+  color: #ef4444;
 }
 

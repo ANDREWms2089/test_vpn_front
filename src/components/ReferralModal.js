@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ReferralModal.css';
 import icCopy from '../images/icons/ic_copy.png';
+import { triggerHaptic } from '../services/telegram';
 
 function ReferralModal({ isOpen, onClose, referralLink = '', friendsInvited = 0, isLoading = false }) {
   const [copied, setCopied] = useState(false);
@@ -8,6 +9,7 @@ function ReferralModal({ isOpen, onClose, referralLink = '', friendsInvited = 0,
   if (!isOpen) return null;
 
   const handleCopyLink = () => {
+    triggerHaptic();
     if (referralLink && !isLoading) {
       navigator.clipboard.writeText(referralLink);
       setCopied(true);
@@ -16,11 +18,11 @@ function ReferralModal({ isOpen, onClose, referralLink = '', friendsInvited = 0,
   };
 
   return (
-    <div className="referral-overlay" onClick={onClose}>
+    <div className="referral-overlay" onClick={() => { triggerHaptic(); onClose?.(); }}>
       <div className="referral-modal" onClick={(e) => e.stopPropagation()}>
         <div className="referral-header">
           <h2 className="referral-title">Реферальная программа</h2>
-          <button type="button" className="referral-close" onClick={onClose}>
+          <button type="button" className="referral-close" onClick={() => { triggerHaptic(); onClose?.(); }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>

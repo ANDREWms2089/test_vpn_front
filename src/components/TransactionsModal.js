@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TransactionsModal.css';
 import apiService from '../services/api';
+import { triggerHaptic } from '../services/telegram';
 
 function formatDate(str) {
   if (!str) return '—';
@@ -55,14 +56,14 @@ function TransactionsModal({ isOpen, onClose, userId }) {
   if (!isOpen) return null;
 
   return (
-    <div className="transactions-overlay" onClick={onClose}>
+    <div className="transactions-overlay" onClick={() => { triggerHaptic(); onClose?.(); }}>
       <div
         className="transactions-sheet"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="transactions-header">
           <h2 className="transactions-title">Мои транзакции</h2>
-          <button type="button" className="transactions-close" onClick={onClose}>
+          <button type="button" className="transactions-close" onClick={() => { triggerHaptic(); onClose?.(); }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>

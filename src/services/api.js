@@ -114,15 +114,19 @@ class ApiService {
   }
 
   async subscriptionCheckout(body) {
+    const payload = {
+      userid: Number(body.userid),
+      tariff_plan: String(body.tariff_plan ?? 'basic'),
+      duration_days: Number(body.duration_days),
+      amount: String(body.amount),
+      return_url: String(body.return_url ?? ''),
+    };
+    if (body.payment_method != null && body.payment_method !== '') {
+      payload.payment_method = String(body.payment_method);
+    }
     return this.request('/subscription/checkout/', {
       method: 'POST',
-      body: {
-        userid: Number(body.userid),
-        tariff_plan: String(body.tariff_plan ?? 'basic'),
-        duration_days: Number(body.duration_days),
-        amount: String(body.amount),
-        return_url: String(body.return_url ?? ''),
-      },
+      body: payload,
     });
   }
 

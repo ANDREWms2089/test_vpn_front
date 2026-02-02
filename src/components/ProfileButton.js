@@ -1,9 +1,11 @@
 import React from 'react';
 import './ProfileButton.css';
 import profileIcon from '../images/icons/icon_profile.png';
+import { triggerHaptic } from '../services/telegram';
 
 function ProfileButton({ onOpenProfile }) {
   const handleClick = () => {
+    triggerHaptic();
     if (onOpenProfile) {
       onOpenProfile();
     }

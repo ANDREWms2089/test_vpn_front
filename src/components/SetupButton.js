@@ -2,12 +2,14 @@ import React from 'react';
 import './SetupButton.css';
 import settingsIcon from '../images/icons/icon_settings.png';
 import { detectPlatform, getPlatformText } from '../utils/platform';
+import { triggerHaptic } from '../services/telegram';
 
 function SetupButton({ onOpenSetup }) {
   const platform = detectPlatform();
   const platformText = getPlatformText(platform);
 
   const handleClick = () => {
+    triggerHaptic();
     if (onOpenSetup) {
       onOpenSetup();
     }
