@@ -14,16 +14,16 @@ function ServiceStatus({ user }) {
     });
   };
 
-  const getSubscriptionColorClass = () => {
+  const getStatusState = () => {
     const tariffEndDate = user?.tariff_end_date;
-    if (!tariffEndDate) return 'subscription-color-red';
+    if (!tariffEndDate) return { label: 'Не активный', class: 'subscription-color-inactive' };
     const endDate = new Date(tariffEndDate);
     const now = new Date();
-    if (endDate <= now) return 'subscription-color-red';
+    if (endDate <= now) return { label: 'Не активный', class: 'subscription-color-inactive' };
     const diffMs = endDate - now;
     const daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-    if (daysLeft > 3) return 'subscription-color-green';
-    return 'subscription-color-yellow';
+    if (daysLeft <= 7) return { label: 'Пробный период', class: 'subscription-color-trial' };
+    return { label: 'Активный', class: 'subscription-color-active' };
   };
 
   const tariffEndDate = user?.tariff_end_date;
@@ -32,19 +32,14 @@ function ServiceStatus({ user }) {
     ? `до ${formatDate(tariffEndDate)}`
     : 'нет подписки';
 
-  const tariffPlan = user?.tariff_plan;
-  const subscriptionType = tariffPlan && hasActiveSubscription
-    ? (tariffPlan.toLowerCase() === 'basic' ? 'Basic' : tariffPlan.toLowerCase() === 'pro' ? 'Pro' : tariffPlan)
-    : 'нет подписки';
-
-  const colorClass = getSubscriptionColorClass();
+  const statusState = getStatusState();
 
   return (
     <div className="service-status">
       <div className="service-name">Beznet</div>
-      <div className={`subscription-date ${colorClass}`}>{subscriptionDate}</div>
+      <div className="subscription-date">{subscriptionDate}</div>
       <div className="service-state">{isOnline ? 'online' : 'offline'}</div>
-      <div className={`subscription-type ${colorClass}`}>{subscriptionType}</div>
+      <div className={`subscription-type ${statusState.class}`}>{statusState.label}</div>
     </div>
   );
 }

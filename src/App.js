@@ -183,13 +183,15 @@ function App() {
         <div className="background"></div>
         <div className="content">
           <Logo />
-          <div className="buttons-container">
-            <ServiceStatus user={user} />
-            <SubscriptionButton user={user} onOpenSubscribe={() => setCurrentPage('tariff')} />
-            <SetupButton onOpenSetup={() => setCurrentPage('setup')} />
-            <div className="bottom-buttons">
-              <ProfileButton onOpenProfile={() => setCurrentPage('profile')} />
-              <SupportButton />
+          <div className="buttons-wrapper">
+            <div className="buttons-container">
+              <ServiceStatus user={user} />
+              <SubscriptionButton user={user} onOpenSubscribe={() => setCurrentPage('tariff')} />
+              <SetupButton onOpenSetup={() => setCurrentPage('setup')} />
+              <div className="bottom-buttons">
+                <ProfileButton onOpenProfile={() => setCurrentPage('profile')} />
+                <SupportButton />
+              </div>
             </div>
           </div>
         </div>

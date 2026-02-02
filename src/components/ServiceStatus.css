@@ -3,62 +3,57 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   row-gap: 6px;
-  column-gap: 16px;
+  column-gap: 12px;
   width: 100%;
-  max-width: 400px;
-  margin-bottom: 18px;
   align-items: baseline;
+}
+
+.service-status .service-name,
+.service-status .service-state {
+  justify-self: start;
+  text-align: left;
+}
+
+.service-status .subscription-date,
+.service-status .subscription-type {
+  justify-self: end;
+  text-align: right;
 }
 
 .service-name {
   font-size: clamp(26px, 7.5vw, 32px);
   font-weight: 600;
   color: white;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .service-state {
   font-size: clamp(14px, 4vw, 16px);
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .subscription-date {
   font-size: clamp(14px, 4vw, 16px);
-  line-height: 1.25;
-  text-align: right;
-  justify-self: end;
-}
-
-.subscription-date.subscription-color-green {
-  color: #22c55e;
-}
-
-.subscription-date.subscription-color-yellow {
-  color: #eab308;
-}
-
-.subscription-date.subscription-color-red {
-  color: #ef4444;
+  line-height: 1.2;
+  color: white;
 }
 
 .subscription-type {
   font-size: clamp(13px, 3.5vw, 14px);
-  line-height: 1.25;
-  text-align: right;
-  justify-self: end;
+  line-height: 1.2;
 }
 
-.subscription-type.subscription-color-green {
-  color: #22c55e;
+.subscription-type.subscription-color-active {
+  color: #046F00;
 }
 
-.subscription-type.subscription-color-yellow {
-  color: #eab308;
+.subscription-type.subscription-color-inactive {
+  color: #913A00;
 }
 
-.subscription-type.subscription-color-red {
-  color: #ef4444;
+.subscription-type.subscription-color-trial {
+  color: #7E57FF;
 }
 
