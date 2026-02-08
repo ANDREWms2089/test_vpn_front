@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
+import AppHeader from './AppHeader';
 import icPay from '../images/icons/ic_pay.png';
 import icReferal from '../images/icons/ic_referal.png';
 import icSupport from '../images/icons/ic_support.png';
@@ -72,11 +73,8 @@ function ProfilePage({ user, onBack, onNavigateToPayment }) {
   return (
     <div className="profile-page">
       <div className="background"></div>
+      <AppHeader title="BezNet VPN" />
       <div className="profile-content">
-        <div className="profile-header">
-          <h1 className="profile-title">Профиль</h1>
-        </div>
-
         <div className="profile-body">
           <div className="profile-info-section">
             <h2 className="profile-name">{userName}</h2>

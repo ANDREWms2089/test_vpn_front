@@ -124,6 +124,9 @@ class ApiService {
     if (body.payment_method != null && body.payment_method !== '') {
       payload.payment_method = String(body.payment_method);
     }
+    if (body.device_count != null) {
+      payload.device_count = Number(body.device_count);
+    }
     return this.request('/subscription/checkout/', {
       method: 'POST',
       body: payload,
@@ -171,4 +174,5 @@ class ApiService {
   }
 }
 
-export default new ApiService();
+const apiService = new ApiService();
+export default apiService;

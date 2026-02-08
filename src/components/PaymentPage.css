@@ -3,6 +3,8 @@
   height: 100vh;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .payment-background {
@@ -11,7 +13,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #05001A;
+  background: radial-gradient(ellipse at 50% 35%, #120a31 0%, #120a31 20%, #05011d 40%, #05001A 65%, #05001A 100%);
   z-index: 0;
 }
 
@@ -19,10 +21,11 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 0;
+  overflow: hidden;
 }
 
 .payment-header {
@@ -52,8 +55,8 @@
 .payment-methods-section {
   width: 100%;
   background: #2E1F4B;
-  border-radius: 16px;
-  border: 1px solid rgba(147, 51, 234, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(147, 51, 234, 0.8);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -86,25 +89,26 @@
   justify-content: space-between;
   width: 100%;
   padding: 14px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(147, 51, 234, 0.4);
-  background: rgba(147, 51, 234, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(147, 51, 234, 0.8);
+  background: rgba(147, 51, 234, 0.15);
   color: white;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, border 0.2s;
   text-align: left;
+  box-sizing: border-box;
 }
 
 .payment-method-item:hover {
-  background: rgba(147, 51, 234, 0.2);
+  background: rgba(147, 51, 234, 0.25);
   border-color: rgba(147, 51, 234, 0.6);
 }
 
 .payment-method-item-selected {
-  background: linear-gradient(90deg, rgba(124, 58, 237, 0.4) 0%, rgba(37, 99, 235, 0.4) 100%);
-  border-color: rgba(147, 51, 234, 0.8);
+  border: none;
+  background: #7E57FF;
 }
 
 .payment-method-item-label {
@@ -119,9 +123,9 @@
 .payment-auto-renewal-button {
   width: 100%;
   min-height: 56px;
-  border-radius: 16px;
-  border: 1px solid rgba(147, 51, 234, 0.3);
-  background: #2E1F4B;
+  border-radius: 12px;
+  border: none;
+  background: #7E57FF;
   color: white;
   font-size: 16px;
   font-weight: 500;

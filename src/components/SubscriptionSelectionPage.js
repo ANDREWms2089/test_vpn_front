@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SubscriptionSelectionPage.css';
+import AppHeader from './AppHeader';
 import ConfirmationModal from './ConfirmationModal';
 import { triggerHaptic } from '../services/telegram';
 
@@ -30,13 +31,12 @@ function SubscriptionSelectionPage({ onBack, tariffId, userId }) {
   return (
     <div className="subscription-selection-page">
       <div className="subscription-selection-background"></div>
+      <AppHeader title="BezNet VPN" />
       <div className="subscription-selection-content">
-        <div className="subscription-selection-header">
-          <h1 className="subscription-selection-title">Выбор подписки</h1>
-        </div>
-
         <div className="subscription-selection-body">
-          <div className="subscription-selection-grid">
+          <div className="subscription-selection-panel">
+            <h1 className="subscription-selection-title">Выбор подписки</h1>
+            <div className="subscription-selection-grid">
             {PLANS.map((plan) => (
               <button
                 key={plan.id}
@@ -44,19 +44,19 @@ function SubscriptionSelectionPage({ onBack, tariffId, userId }) {
                 className={`subscription-plan-card ${selectedPlan.id === plan.id ? 'subscription-plan-card-selected' : ''}`}
                 onClick={() => { triggerHaptic(); setSelectedPlan(plan); }}
               >
-                <span className="subscription-plan-badge">ПОПУЛЯРНЫЙ</span>
                 <span className="subscription-plan-label">{plan.label}</span>
+                <span className="subscription-plan-badge">ПОПУЛЯРНЫЙ</span>
                 <span className="subscription-plan-price">{plan.price} Р</span>
                 {plan.pricePerMonth != null && (
                   <span className="subscription-plan-price-per-month">{plan.pricePerMonth} Р в месяц</span>
                 )}
               </button>
             ))}
+            </div>
+            <button type="button" className="subscription-selection-pay-button" onClick={handlePayClick}>
+              Оплатить {selectedPlan.price} Р
+            </button>
           </div>
-
-          <button type="button" className="subscription-selection-pay-button" onClick={handlePayClick}>
-            Оплатить {selectedPlan.price} Р
-          </button>
         </div>
       </div>
 

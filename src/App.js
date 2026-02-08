@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import AppHeader from './components/AppHeader';
 import Logo from './components/Logo';
 import ServiceStatus from './components/ServiceStatus';
 import SubscriptionButton from './components/SubscriptionButton';
@@ -119,6 +120,7 @@ function App() {
     return (
       <div className="app">
         <div className="background"></div>
+        <AppHeader title="BezNet VPN" />
         <div className="content">
           <Logo />
         </div>
@@ -181,6 +183,7 @@ function App() {
   return (
       <div className="app">
         <div className="background"></div>
+        <AppHeader title="BezNet VPN" />
         <div className="content">
           <Logo />
           <div className="buttons-wrapper">

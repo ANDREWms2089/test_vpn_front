@@ -44,6 +44,20 @@ export async function initTelegramSDK() {
       const getHf = sdk.initHapticFeedback();
       hapticFeedback = typeof getHf === 'function' ? getHf() : getHf;
     }
+    if (typeof window !== 'undefined') {
+      const wa = window.Telegram?.WebApp;
+      const wv = window.Telegram?.WebView;
+      if (wa && typeof wa.ready === 'function') wa.ready();
+      if (wa && typeof wa.requestFullscreen === 'function') {
+        wa.requestFullscreen();
+      } else if (wv && typeof wv.postEvent === 'function') {
+        wv.postEvent('web_app_request_fullscreen', () => {}, {});
+      }
+      if (wa && typeof wa.expand === 'function') wa.expand();
+    }
+    if (miniApp && typeof miniApp.expand === 'function') {
+      miniApp.expand();
+    }
     return { initData: initDataResult, miniApp: miniAppResult };
   } catch (error) {
     console.error('Telegram SDK initialization error:', error);

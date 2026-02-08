@@ -1,0 +1,132 @@
+.fanfare-confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.fanfare-piece {
+  position: absolute;
+  opacity: 0;
+  animation: fanfare-sequence var(--duration, 3s) ease-in-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.fanfare-left {
+  left: -20px;
+  transform-origin: left bottom;
+}
+
+.fanfare-right {
+  right: -20px;
+  left: auto;
+  transform-origin: right bottom;
+}
+
+.fanfare-square {
+  border-radius: 2px;
+}
+
+.fanfare-dot {
+  border-radius: 50%;
+}
+
+.fanfare-sausage-wrap {
+  width: 42px;
+  height: 114px;
+  z-index: 2;
+}
+
+.fanfare-sausage-wrap.fanfare-left {
+  left: -8px;
+}
+
+.fanfare-sausage-wrap.fanfare-right {
+  right: -8px;
+  left: auto;
+}
+
+.fanfare-left.fanfare-sausage-wrap {
+  animation-name: fanfare-sequence-left;
+}
+
+.fanfare-right.fanfare-sausage-wrap {
+  animation-name: fanfare-sequence-right;
+}
+
+.fanfare-ribbon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  transform: rotate(var(--rotation, 0deg));
+  animation: ribbon-spin 0.4s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+  animation-iteration-count: 1;
+  shape-rendering: geometricPrecision;
+}
+
+@keyframes ribbon-spin {
+  0% {
+    transform: rotate(var(--rotation, 0deg)) rotateZ(0deg);
+  }
+  100% {
+    transform: rotate(var(--rotation, 0deg)) rotateZ(180deg);
+  }
+}
+
+.fanfare-left.fanfare-square,
+.fanfare-left.fanfare-dot {
+  animation-name: fanfare-sequence-left;
+}
+
+.fanfare-right.fanfare-square,
+.fanfare-right.fanfare-dot {
+  animation-name: fanfare-sequence-right;
+}
+
+@keyframes fanfare-sequence-left {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(var(--peak-x, 50vw), var(--peak-y, -50vh)) scale(1);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(var(--peak-x, 50vw), var(--peak-y, -50vh)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--peak-x, 50vw), var(--peak-y, -50vh)) scale(0.9);
+  }
+}
+
+@keyframes fanfare-sequence-right {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(var(--peak-x, -50vw), var(--peak-y, -50vh)) scale(1);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(var(--peak-x, -50vw), var(--peak-y, -50vh)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--peak-x, -50vw), var(--peak-y, -50vh)) scale(0.9);
+  }
+}
+

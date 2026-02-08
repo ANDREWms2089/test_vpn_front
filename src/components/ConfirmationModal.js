@@ -4,13 +4,22 @@ import apiService from '../services/api';
 import { triggerHaptic } from '../services/telegram';
 import { PAYMENT_METHODS, getPaymentMethod, setPaymentMethod } from '../utils/paymentMethod';
 
+const MIN_DEVICES = 1;
+const MAX_DEVICES = 10;
+
 function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, userId }) {
   const [isPaying, setIsPaying] = useState(false);
   const [payError, setPayError] = useState(null);
   const [paymentMethod, setPaymentMethodState] = useState('card');
+  const [deviceCount, setDeviceCount] = useState(2);
+  const [deviceCountInput, setDeviceCountInput] = useState('2');
 
   useEffect(() => {
-    if (isOpen) setPaymentMethodState(getPaymentMethod());
+    if (isOpen) {
+      setPaymentMethodState(getPaymentMethod());
+      setDeviceCount(2);
+      setDeviceCountInput('2');
+    }
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -21,7 +30,22 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
     ? `Подписка до ${dateEnd}, ${plan.months} ${monthWord}`
     : '';
 
-  const deviceCount = 2;
+  const handleDeviceCountChange = (e) => {
+    const raw = e.target.value;
+    setDeviceCountInput(raw);
+    if (raw === '') return;
+    const val = parseInt(raw, 10);
+    if (!isNaN(val) && val >= MIN_DEVICES && val <= MAX_DEVICES) {
+      setDeviceCount(val);
+    }
+  };
+
+  const handleDeviceCountBlur = () => {
+    const val = parseInt(deviceCountInput, 10);
+    const clamped = isNaN(val) || val < MIN_DEVICES ? MIN_DEVICES : val > MAX_DEVICES ? MAX_DEVICES : val;
+    setDeviceCount(clamped);
+    setDeviceCountInput(String(clamped));
+  };
   const displayPrice = plan ? plan.price : 0;
 
   const durationDays = plan ? Math.round(plan.months * 30.44) : 30;
@@ -42,6 +66,7 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
         amount: String(plan.price),
         return_url: returnUrl,
         payment_method: paymentMethod,
+        device_count: deviceCount,
       });
       if (res && res.confirmation_url) {
         window.location.href = res.confirmation_url;
@@ -74,7 +99,17 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
           </div>
           <div className="confirmation-row">
             <span className="confirmation-label">Количество устройств</span>
-            <span className="confirmation-value">{deviceCount}</span>
+            <div className="confirmation-device-input-wrap">
+              <input
+                type="number"
+                min={MIN_DEVICES}
+                max={MAX_DEVICES}
+                value={deviceCountInput}
+                onChange={handleDeviceCountChange}
+                onBlur={handleDeviceCountBlur}
+                className="confirmation-device-input"
+              />
+            </div>
           </div>
           <div className="confirmation-row">
             <span className="confirmation-label">Способ оплаты</span>

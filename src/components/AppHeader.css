@@ -1,0 +1,29 @@
+.app-header {
+  flex-shrink: 0;
+  padding-top: calc(env(safe-area-inset-top) + 52px);
+  position: relative;
+  z-index: 10;
+}
+
+.app-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 16px;
+}
+
+.app-header-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.app-header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}

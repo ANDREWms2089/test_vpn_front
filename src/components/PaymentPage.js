@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PaymentPage.css';
+import AppHeader from './AppHeader';
 import { triggerHaptic } from '../services/telegram';
 import { PAYMENT_METHODS, getPaymentMethod, setPaymentMethod } from '../utils/paymentMethod';
 
@@ -23,11 +24,8 @@ function PaymentPage({ onBack }) {
   return (
     <div className="payment-page">
       <div className="payment-background"></div>
+      <AppHeader title="BezNet VPN" />
       <div className="payment-content">
-        <div className="payment-header">
-          <h1 className="payment-title">Оплата</h1>
-        </div>
-
         <div className="payment-body">
           <div className="payment-methods-section">
             <span className="payment-methods-section-title">Способ оплаты</span>

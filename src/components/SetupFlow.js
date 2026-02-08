@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SetupFlow.css';
+import AppHeader from './AppHeader';
 import { detectPlatform } from '../utils/platform';
 import icConnect from '../images/icons/ic_connect.png';
 import icCloud from '../images/icons/ic_cloud.png';
@@ -7,6 +8,7 @@ import icAdd from '../images/icons/ic_add.png';
 import icDone from '../images/icons/ic_done.png';
 import apiService from '../services/api';
 import Toast from './Toast';
+import FanfareConfetti from './FanfareConfetti';
 import { triggerHaptic } from '../services/telegram';
 
 const PLATFORM_LINKS = {
@@ -99,104 +101,129 @@ function SetupFlow({ onBack, onComplete, user }) {
 
   if (step === 1) {
     return (
-      <div className="setup-flow">
-        <div className="background"></div>
-        <div className="setup-content">
-          <div className="setup-icon-container">
-            <div className="setup-ripple"></div>
-            <div className="setup-icon-wrapper">
-              <img src={icConnect} alt="" className="setup-icon-image" />
+      <>
+        <div className="setup-flow">
+          <div className="background"></div>
+          <AppHeader title="BezNet VPN" />
+          <div className="setup-content">
+            <div className="setup-icon-container">
+              <div className="setup-ripple"></div>
+              <div className="setup-icon-wrapper">
+                <img src={icConnect} alt="" className="setup-icon-image" />
+              </div>
+            </div>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
+              <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
+              <div className="setup-buttons">
+              <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
+                Начать установку на этом устройстве
+              </button>
+              <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
+                Установить на другом устройстве
+              </button>
+            </div>
             </div>
           </div>
-          <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
-          <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
-          <div className="setup-buttons">
-            <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
-              Начать установку на этом устройстве
-            </button>
-            <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
-              Установить на другом устройстве
-            </button>
-          </div>
         </div>
-      </div>
+        <Toast isOpen={toast.isOpen} message={toast.message} type={toast.type} onClose={() => setToast({ ...toast, isOpen: false })} />
+      </>
     );
   }
 
   if (step === 2) {
     return (
-      <div className="setup-flow">
-        <div className="background"></div>
-        <div className="setup-content">
-          <div className="setup-icon-container">
-            <div className="setup-ripple"></div>
-            <div className="setup-icon-wrapper">
-              <img src={icCloud} alt="" className="setup-icon-image" />
+      <>
+        <div className="setup-flow">
+          <div className="background"></div>
+          <AppHeader title="BezNet VPN" />
+          <div className="setup-content">
+            <div className="setup-icon-container">
+              <div className="setup-ripple"></div>
+              <div className="setup-icon-wrapper">
+                <img src={icCloud} alt="" className="setup-icon-image" />
+              </div>
+            </div>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Приложение</h2>
+              <p className="setup-description">Установите приложение v2RayTun и вернитесь к этому экрану</p>
+              <div className="setup-buttons-row">
+              <button className="setup-install-button" onClick={handleInstallClick}>
+                <img src={icConnect} alt="" className="button-icon-small" />
+                Установить
+              </button>
+              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
+                Далее
+              </button>
+            </div>
             </div>
           </div>
-          <h2 className="setup-title">Приложение</h2>
-          <p className="setup-description">Установите приложение v2RayTun и вернитесь к этому экрану</p>
-          <div className="setup-buttons-row">
-            <button className="setup-install-button" onClick={handleInstallClick}>
-              <img src={icConnect} alt="" className="button-icon-small" />
-              Установить
-            </button>
-            <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
-              Далее
-            </button>
-          </div>
         </div>
-      </div>
+        <Toast isOpen={toast.isOpen} message={toast.message} type={toast.type} onClose={() => setToast({ ...toast, isOpen: false })} />
+      </>
     );
   }
 
   if (step === 3) {
     return (
-      <div className="setup-flow">
-        <div className="background"></div>
-        <div className="setup-content">
-          <div className="setup-icon-container">
-            <div className="setup-ripple"></div>
-            <div className="setup-icon-wrapper">
-              <img src={icAdd} alt="" className="setup-icon-image" />
+      <>
+        <div className="setup-flow">
+          <div className="background"></div>
+          <AppHeader title="BezNet VPN" />
+          <div className="setup-content">
+            <div className="setup-icon-container">
+              <div className="setup-ripple"></div>
+              <div className="setup-icon-wrapper">
+                <img src={icAdd} alt="" className="setup-icon-image" />
+              </div>
+            </div>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Подписка</h2>
+              <p className="setup-description">Добавьте подписку в приложение v2RayTun с помощью кнопки ниже</p>
+              <div className="setup-buttons-row">
+              <button className="setup-add-button" onClick={handleAddSubscription}>
+                <img src={icConnect} alt="" className="button-icon-small" />
+                Добавить
+              </button>
+              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
+                Далее
+              </button>
+            </div>
             </div>
           </div>
-          <h2 className="setup-title">Подписка</h2>
-          <p className="setup-description">Добавьте подписку в приложение v2RayTun с помощью кнопки ниже</p>
-          <div className="setup-buttons-row">
-            <button className="setup-add-button" onClick={handleAddSubscription}>
-              <img src={icConnect} alt="" className="button-icon-small" />
-              Добавить
-            </button>
-            <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
-              Далее
-            </button>
-          </div>
         </div>
-      </div>
+        <Toast isOpen={toast.isOpen} message={toast.message} type={toast.type} onClose={() => setToast({ ...toast, isOpen: false })} />
+      </>
     );
   }
 
   if (step === 4) {
     return (
-      <div className="setup-flow">
-        <div className="background"></div>
-        <div className="setup-content">
-          <div className="setup-icon-container">
-            <div className="setup-success-ripple"></div>
-            <div className="setup-success-icon">
-              <img src={icDone} alt="" className="setup-done-image" />
+      <>
+        <div className="setup-flow">
+          <FanfareConfetti />
+          <div className="background"></div>
+          <AppHeader title="BezNet VPN" />
+          <div className="setup-content">
+            <div className="setup-icon-container">
+              <div className="setup-success-ripple"></div>
+              <div className="setup-success-icon">
+                <img src={icDone} alt="" className="setup-done-image" />
+              </div>
+            </div>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Готово!</h2>
+              <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
+              <div className="setup-buttons">
+              <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
+                Завершить настройку
+              </button>
+            </div>
             </div>
           </div>
-          <h2 className="setup-title">Готово!</h2>
-          <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
-          <div className="setup-buttons">
-            <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
-              Завершить настройку
-            </button>
-          </div>
         </div>
-      </div>
+        <Toast isOpen={toast.isOpen} message={toast.message} type={toast.type} onClose={() => setToast({ ...toast, isOpen: false })} />
+      </>
     );
   }
 
@@ -212,15 +239,17 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icConnect} alt="" className="setup-icon-image" />
               </div>
             </div>
-            <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
-            <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
-            <div className="setup-buttons">
-              <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
-                Начать установку на этом устройстве
-              </button>
-              <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
-                Установить на другом устройстве
-              </button>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Настройка на {platform === 'iOS' ? 'iOS' : platform}</h2>
+              <p className="setup-description">Настройка VPN происходит в 3 шага и занимает пару минут</p>
+              <div className="setup-buttons">
+                <button className="setup-primary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
+                  Начать установку на этом устройстве
+                </button>
+                <button className="setup-secondary-button" onClick={() => { triggerHaptic(); setStep(2); }}>
+                  Установить на другом устройстве
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -235,16 +264,18 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icCloud} alt="" className="setup-icon-image" />
               </div>
             </div>
-            <h2 className="setup-title">Приложение</h2>
-            <p className="setup-description">Установите приложение v2RayTun и вернитесь к этому экрану</p>
-            <div className="setup-buttons-row">
-              <button className="setup-install-button" onClick={handleInstallClick}>
-                <img src={icConnect} alt="" className="button-icon-small" />
-                Установить
-              </button>
-              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
-                Далее
-              </button>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Приложение</h2>
+              <p className="setup-description">Установите приложение v2RayTun и вернитесь к этому экрану</p>
+              <div className="setup-buttons-row">
+                <button className="setup-install-button" onClick={handleInstallClick}>
+                  <img src={icConnect} alt="" className="button-icon-small" />
+                  Установить
+                </button>
+                <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(3); }}>
+                  Далее
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -259,22 +290,25 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icAdd} alt="" className="setup-icon-image" />
               </div>
             </div>
-            <h2 className="setup-title">Подписка</h2>
-            <p className="setup-description">Добавьте подписку в приложение v2RayTun с помощью кнопки ниже</p>
-            <div className="setup-buttons-row">
-              <button className="setup-add-button" onClick={handleAddSubscription}>
-                <img src={icConnect} alt="" className="button-icon-small" />
-                Добавить
-              </button>
-              <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
-                Далее
-              </button>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Подписка</h2>
+              <p className="setup-description">Добавьте подписку в приложение v2RayTun с помощью кнопки ниже</p>
+              <div className="setup-buttons-row">
+                <button className="setup-add-button" onClick={handleAddSubscription}>
+                  <img src={icConnect} alt="" className="button-icon-small" />
+                  Добавить
+                </button>
+                <button className="setup-next-button" onClick={() => { triggerHaptic(); setStep(4); }}>
+                  Далее
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
       {step === 4 && (
         <div className="setup-flow">
+          <FanfareConfetti />
           <div className="background"></div>
           <div className="setup-content">
             <div className="setup-icon-container">
@@ -283,12 +317,14 @@ function SetupFlow({ onBack, onComplete, user }) {
                 <img src={icDone} alt="" className="setup-done-image" />
               </div>
             </div>
-            <h2 className="setup-title">Готово!</h2>
-            <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
-            <div className="setup-buttons">
-              <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
-                Завершить настройку
-              </button>
+            <div className="setup-text-buttons">
+              <h2 className="setup-title">Готово!</h2>
+              <p className="setup-description">Нажмите на круглую кнопку включения VPN в приложении v2RayTun</p>
+              <div className="setup-buttons">
+                <button className="setup-complete-button" onClick={() => { triggerHaptic(); onComplete?.(); }}>
+                  Завершить настройку
+                </button>
+              </div>
             </div>
           </div>
         </div>

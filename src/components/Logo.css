@@ -37,7 +37,7 @@
   margin-top: -86px;
   border-radius: 50%;
   border: 2px solid rgba(147, 51, 234, 0.7);
-  animation: logoRingPulse 2s ease-in-out infinite;
+  animation: logoRingPulse 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
   z-index: 3;
   pointer-events: none;
   box-sizing: border-box;
@@ -45,43 +45,22 @@
 
 .ripple {
   position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(147, 51, 234, 0.35);
-  animation: ripple 3s ease-out infinite;
+  border-radius: 1000px;
+  border-width: 2px;
+  border-style: solid;
+  box-sizing: border-box;
+  animation: rippleExpand 3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
   z-index: 1;
   pointer-events: none;
 }
 
-.ripple-2 {
-  width: min(200px, 50vw);
-  height: min(200px, 50vw);
-  border-color: rgba(147, 51, 234, 0.28);
-  animation-delay: 0.75s;
-}
-
-.ripple-3 {
-  width: min(260px, 65vw);
-  height: min(260px, 65vw);
-  border-color: rgba(147, 51, 234, 0.22);
-  animation-delay: 0.5s;
-}
-
-.ripple-4 {
-  width: min(320px, 80vw);
-  height: min(320px, 80vw);
-  border-color: rgba(147, 51, 234, 0.18);
-  animation-delay: 0.25s;
-}
-
-.ripple-5 {
-  width: min(380px, 95vw);
-  height: min(380px, 95vw);
-  border-color: rgba(147, 51, 234, 0.14);
-  animation-delay: 0s;
-}
+.ripple-1 { animation-delay: 0s; }
+.ripple-2 { animation-delay: 1.5s; }
+.ripple-3 { animation-delay: 3s; }
+.ripple-4 { animation-delay: 4.5s; }
 
 @keyframes logoRingPulse {
   0%, 100% {
@@ -96,13 +75,33 @@
   }
 }
 
-@keyframes ripple {
+@keyframes rippleExpand {
   0% {
-    transform: translate(-50%, -50%) scale(1);
+    width: 180px;
+    height: 180px;
+    transform: translate(-50%, -50%);
+    border-color: #7E57FF4D;
+    opacity: 1;
+  }
+  33.33% {
+    width: 260px;
+    height: 260px;
+    transform: translate(-50%, -50%);
+    border-color: #9D7FFF33;
+    opacity: 1;
+  }
+  66.66% {
+    width: 340px;
+    height: 340px;
+    transform: translate(-50%, -50%);
+    border-color: #5E2DFF1A;
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.5);
+    width: 340px;
+    height: 340px;
+    transform: translate(-50%, -50%);
+    border-color: #5E2DFF1A;
     opacity: 0;
   }
 }
