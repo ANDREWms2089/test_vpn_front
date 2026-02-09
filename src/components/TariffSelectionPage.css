@@ -17,6 +17,12 @@
   z-index: 0;
 }
 
+@media (max-width: 768px) {
+  .tariff-background {
+    background: radial-gradient(circle 120vmin at 50% 35%, #120a31 0%, #120a31 20%, #05011d 40%, #05001A 65%, #05001A 100%);
+  }
+}
+
 .tariff-content {
   position: relative;
   z-index: 1;

@@ -5,7 +5,6 @@ import { triggerHaptic } from '../services/telegram';
 import { PAYMENT_METHODS, getPaymentMethod, setPaymentMethod } from '../utils/paymentMethod';
 
 const MIN_DEVICES = 1;
-const MAX_DEVICES = 10;
 
 function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, userId }) {
   const [isPaying, setIsPaying] = useState(false);
@@ -35,14 +34,14 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
     setDeviceCountInput(raw);
     if (raw === '') return;
     const val = parseInt(raw, 10);
-    if (!isNaN(val) && val >= MIN_DEVICES && val <= MAX_DEVICES) {
+    if (!isNaN(val) && val >= MIN_DEVICES) {
       setDeviceCount(val);
     }
   };
 
   const handleDeviceCountBlur = () => {
     const val = parseInt(deviceCountInput, 10);
-    const clamped = isNaN(val) || val < MIN_DEVICES ? MIN_DEVICES : val > MAX_DEVICES ? MAX_DEVICES : val;
+    const clamped = isNaN(val) || val < MIN_DEVICES ? MIN_DEVICES : val;
     setDeviceCount(clamped);
     setDeviceCountInput(String(clamped));
   };
@@ -103,7 +102,6 @@ function ConfirmationModal({ isOpen, onClose, plan, tariffId, formatDateEnd, use
               <input
                 type="number"
                 min={MIN_DEVICES}
-                max={MAX_DEVICES}
                 value={deviceCountInput}
                 onChange={handleDeviceCountChange}
                 onBlur={handleDeviceCountBlur}

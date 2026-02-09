@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://api.real-2.space';
+const API_BASE_URL = 'https://testbeznetbackend.vercel.app';
 
 class ApiService {
   async request(endpoint, options = {}) {
